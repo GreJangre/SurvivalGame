@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class CloseWeaponController : MonoBehaviour
 {
     // 현재 장착된 Hand형 타입 무기
-    [SerializeField] private CloseWeapon currenCloseWeapon;
+    [SerializeField] protected CloseWeapon currenCloseWeapon;
     
     // 공격중
     protected bool isAttack = false;
