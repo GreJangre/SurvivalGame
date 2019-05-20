@@ -47,13 +47,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Camera theCamera = null;
     private Rigidbody myRigid = null;
-    private Crosshair theCrossghair;
+    private Crosshair theCrosshair;
     // Start is called before the first frame update
     void Start()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
         myRigid = GetComponent<Rigidbody>();
-        theCrossghair = FindObjectOfType<Crosshair>();
+        theCrosshair = FindObjectOfType<Crosshair>();
         
         // 초기화
         _applySpeed = walkSpeed;
@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
     private void Crouch()
     {
         isCrouch = !isCrouch;
-        theCrossghair.CrouchingAnimation(isCrouch);
+        theCrosshair.CrouchingAnimation(isCrouch);
 
         if (isCrouch)
         {
@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
     private void IsGround()
     {
         isGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.2f);
-        theCrossghair.JumpingAnimation(!isGround);
+        theCrosshair.JumpingAnimation(!isGround);
     }
 
     // 점프 시도
@@ -167,7 +167,7 @@ public class PlayerController : MonoBehaviour
             Crouch();
         
         isRun = true;
-        theCrossghair.RunningAnimation(isRun);
+        theCrosshair.RunningAnimation(isRun);
         _applySpeed = runSpeed;
     }
 
@@ -175,7 +175,7 @@ public class PlayerController : MonoBehaviour
     private void RunningCancel()
     {
         isRun = false;
-        theCrossghair.RunningAnimation(isRun);
+        theCrosshair.RunningAnimation(isRun);
         _applySpeed = walkSpeed;
     }
 
@@ -196,7 +196,7 @@ public class PlayerController : MonoBehaviour
 
     private void MoveCheck(Vector3 velocity)
     {
-        if (!isRun && !isCrouch && isGround)
+        if (!isRun && isGround)
         {
             if (velocity.magnitude >= 0.1f)
             {
@@ -206,8 +206,13 @@ public class PlayerController : MonoBehaviour
             {
                 isWalk = false;
             }
-            
-            theCrossghair.WalkingAnimation(isWalk);
+
+            if (isCrouch)
+            {
+                theCrosshair.CrouchingAnimation(isWalk);    
+            }
+            else
+                theCrosshair.WalkingAnimation(isWalk);
         }
     }
 
