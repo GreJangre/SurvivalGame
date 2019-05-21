@@ -19,6 +19,7 @@ public class AxeController : CloseWeaponController
         {
             TryAttack();
             Debug.Log("Test");
+            Debug.Log("Test");
         }
     }
     protected override IEnumerator HitCoroutine()
