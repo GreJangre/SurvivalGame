@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private bool isRun = false;
     private bool isCrouch = false;
     private bool isGround = true;
+    
     // 움직임 체크 변수
     private Vector3 lastPos;
 
@@ -47,15 +48,12 @@ public class PlayerController : MonoBehaviour
     private Camera theCamera = null;
     private Rigidbody myRigid = null;
     private Crosshair theCrosshair;
-
-    private StatusController theStatusController;
     // Start is called before the first frame update
     void Start()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
         myRigid = GetComponent<Rigidbody>();
         theCrosshair = FindObjectOfType<Crosshair>();
-        theStatusController = FindObjectOfType<StatusController>();
         
         // 초기화
         _applySpeed = walkSpeed;
@@ -145,7 +143,6 @@ public class PlayerController : MonoBehaviour
         if (isCrouch)
             Crouch();
         
-        theStatusController.DecreaseStamina(100);
         myRigid.velocity = transform.up * jumpForce;
     }
     
@@ -171,7 +168,6 @@ public class PlayerController : MonoBehaviour
         
         isRun = true;
         theCrosshair.RunningAnimation(isRun);
-        theStatusController.DecreaseStamina(5);
         _applySpeed = runSpeed;
     }
 
