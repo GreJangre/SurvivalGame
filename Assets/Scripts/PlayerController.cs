@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private bool isRun = false;
     private bool isCrouch = false;
     private bool isGround = true;
+    
     // 움직임 체크 변수
     private Vector3 lastPos;
 
@@ -46,16 +47,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Camera theCamera = null;
     private Rigidbody myRigid = null;
-    private Crosshair theCrosshair;
-
-    private StatusController theStatusController;
+    private Crosshair theCrossghair;
     // Start is called before the first frame update
     void Start()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
         myRigid = GetComponent<Rigidbody>();
-        theCrosshair = FindObjectOfType<Crosshair>();
-        theStatusController = FindObjectOfType<StatusController>();
+        theCrossghair = FindObjectOfType<Crosshair>();
         
         // 초기화
         _applySpeed = walkSpeed;
@@ -88,7 +86,7 @@ public class PlayerController : MonoBehaviour
     private void Crouch()
     {
         isCrouch = !isCrouch;
-        theCrosshair.CrouchingAnimation(isCrouch);
+        theCrossghair.CrouchingAnimation(isCrouch);
 
         if (isCrouch)
         {
@@ -127,7 +125,7 @@ public class PlayerController : MonoBehaviour
     private void IsGround()
     {
         isGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.2f);
-        theCrosshair.JumpingAnimation(!isGround);
+        theCrossghair.JumpingAnimation(!isGround);
     }
 
     // 점프 시도
@@ -145,7 +143,6 @@ public class PlayerController : MonoBehaviour
         if (isCrouch)
             Crouch();
         
-        theStatusController.DecreaseStamina(100);
         myRigid.velocity = transform.up * jumpForce;
     }
     
@@ -170,8 +167,7 @@ public class PlayerController : MonoBehaviour
             Crouch();
         
         isRun = true;
-        theCrosshair.RunningAnimation(isRun);
-        theStatusController.DecreaseStamina(5);
+        theCrossghair.RunningAnimation(isRun);
         _applySpeed = runSpeed;
     }
 
@@ -179,7 +175,7 @@ public class PlayerController : MonoBehaviour
     private void RunningCancel()
     {
         isRun = false;
-        theCrosshair.RunningAnimation(isRun);
+        theCrossghair.RunningAnimation(isRun);
         _applySpeed = walkSpeed;
     }
 
@@ -200,7 +196,7 @@ public class PlayerController : MonoBehaviour
 
     private void MoveCheck(Vector3 velocity)
     {
-        if (!isRun && isGround)
+        if (!isRun && !isCrouch && isGround)
         {
             if (velocity.magnitude >= 0.1f)
             {
@@ -210,13 +206,8 @@ public class PlayerController : MonoBehaviour
             {
                 isWalk = false;
             }
-
-            if (isCrouch)
-            {
-                theCrosshair.CrouchingAnimation(isWalk);    
-            }
-            else
-                theCrosshair.WalkingAnimation(isWalk);
+            
+            theCrossghair.WalkingAnimation(isWalk);
         }
     }
 
