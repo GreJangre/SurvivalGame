@@ -18,6 +18,8 @@ public class AxeController : CloseWeaponController
         if (isActivate)
         {
             TryAttack();
+            Debug.Log("Test");
+            Debug.Log("Test");
         }
     }
     protected override IEnumerator HitCoroutine()
