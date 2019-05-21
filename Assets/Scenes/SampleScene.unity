@@ -676,6 +676,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 312358130}
+  - component: {fileID: 312358131}
   m_Layer: 5
   m_Name: Status
   m_TagString: Untagged
@@ -703,6 +704,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &312358131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312358129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9893f6d70d374b0793e0cf21240741c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
+  sp: 1000
+  spIncreaseSpeed: 3
+  spRechargeTime: 0
+  dp: 100
+  images_Gauge:
+  - {fileID: 133029990}
+  - {fileID: 219653748}
+  - {fileID: 762513168}
 --- !u!1 &575470784
 GameObject:
   m_ObjectHideFlags: 0
@@ -1961,7 +1983,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -380, y: -155}
+  m_AnchoredPosition: {x: -264, y: -101.5}
   m_SizeDelta: {x: 197, y: 203}
   m_Pivot: {x: 0.5, y: 0.50000006}
 --- !u!114 &921753323
